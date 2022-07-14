@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class DomainUser extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'domain_id',
+        'user',
+        'password',
+    ];
 }

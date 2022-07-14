@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class DomainAlias extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'source_id',
+        'destination',
+    ];
 }
