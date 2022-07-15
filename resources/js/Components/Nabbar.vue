@@ -1,6 +1,6 @@
 <script setup>
-import { usePage, Link } from '@inertiajs/inertia-vue3'
-const page = usePage()
+import { usePage, Link } from '@inertiajs/inertia-vue3';
+const page = usePage();
 </script>
 <template>
   <nav id="navbar">
@@ -13,6 +13,9 @@ const page = usePage()
       </li>
       <li class="item">
         <Link href="/domain">Dominios</Link>
+      </li>
+      <li class="item">
+        <Link href="/domain-user">E-mails</Link>
       </li>
     </ul>
   </nav>

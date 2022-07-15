@@ -1,5 +1,5 @@
 <script setup>
-import { useForm } from '@inertiajs/inertia-vue3';
+import { useForm, Head } from '@inertiajs/inertia-vue3';
 import Layout from '../Layouts/Layout.vue';
 import NumericInput from '../Components/NumericInput.vue';
 import DomainList from '@/Components/DomainList.vue';
@@ -41,6 +41,7 @@ const edit = (data) => {
 </script>
 <template>
   <Layout>
+    <Head title="Dominios" />
     <div id="domains">
       <form @submit.prevent="submit">
         <div class="form-line">

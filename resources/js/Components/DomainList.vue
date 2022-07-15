@@ -1,11 +1,11 @@
 <script setup>
-defineEmits(['edit', 'delete'])
+defineEmits(['edit', 'delete']);
 defineProps({
   domains: {
     type: Array,
     default: [],
   },
-})
+});
 </script>
 <template>
   <div class="domains">
