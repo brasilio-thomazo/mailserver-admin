@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreDomainRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class StoreDomainRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return Auth::check();
     }
 
     /**
@@ -24,7 +25,10 @@ class StoreDomainRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|string|unique:domains,name',
+            'home' => 'required|string',
+            'uid' => 'required|numeric|min:100|max:9999',
+            'gid' => 'required|numeric|min:100|max:9999'
         ];
     }
 }

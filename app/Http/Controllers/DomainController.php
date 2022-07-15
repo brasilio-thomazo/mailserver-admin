@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreDomainRequest;
 use App\Http\Requests\UpdateDomainRequest;
 use App\Models\Domain;
+use Inertia\Inertia;
 
 class DomainController extends Controller
 {
@@ -15,7 +16,8 @@ class DomainController extends Controller
      */
     public function index()
     {
-        //
+        $data = Domain::all();
+        return Inertia::render('Domains', ['domains' => $data]);
     }
 
     /**
@@ -36,7 +38,9 @@ class DomainController extends Controller
      */
     public function store(StoreDomainRequest $request)
     {
-        //
+        $data = new Domain($request->all());
+        $data->save();
+        return redirect(route('domain.index'));
     }
 
     /**
@@ -70,7 +74,8 @@ class DomainController extends Controller
      */
     public function update(UpdateDomainRequest $request, Domain $domain)
     {
-        //
+        $domain->update($request->only(['name', 'home', 'uid', 'gid']));
+        return redirect(route('domain.index'));
     }
 
     /**

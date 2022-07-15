@@ -1,0 +1,23 @@
+#login {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  form {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+
+    .header {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      img {
+        max-width: 90px;
+      }
+    }
+  }
+}
