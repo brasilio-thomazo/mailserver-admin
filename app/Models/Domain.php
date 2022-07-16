@@ -15,4 +15,14 @@ class Domain extends Model
         'uid',
         'gid',
     ];
+
+    public function alias()
+    {
+        return $this->hasOne(DomainAlias::class, "source_id", "id");
+    }
+
+    public function users()
+    {
+        return $this->hasMany(DomainUser::class, "domain_id", "id");
+    }
 }

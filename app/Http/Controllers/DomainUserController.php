@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreDomainUserRequest;
 use App\Http\Requests\UpdateDomainUserRequest;
+use App\Models\Domain;
 use App\Models\DomainUser;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
+use Inertia\Inertia;
 
 class DomainUserController extends Controller
 {
@@ -15,7 +19,9 @@ class DomainUserController extends Controller
      */
     public function index()
     {
-        //
+        $users = DomainUser::with(["domain"])->get();
+        $domains = Domain::all();
+        return Inertia::render('DomainUsers', ['domains' => $domains, 'users' => $users]);
     }
 
     /**
@@ -36,7 +42,13 @@ class DomainUserController extends Controller
      */
     public function store(StoreDomainUserRequest $request)
     {
-        //
+        $user = new DomainUser([
+            'domain_id' => $request->get('domain_id'),
+            'user' => $request->get('user'),
+            'password' => Hash::make($request->get('password'))
+        ]);
+        $user->save();
+        return redirect(route('domain-user.index'));
     }
 
     /**
@@ -70,7 +82,15 @@ class DomainUserController extends Controller
      */
     public function update(UpdateDomainUserRequest $request, DomainUser $domainUser)
     {
-        //
+        $update = [
+            'domain_id' => $request->get('domain_id'),
+            'user' => $request->get('user'),
+        ];
+        if ($request->get('password')) {
+            $update['password'] = Hash::make($request->get('password'));
+        }
+        $domainUser->update($update);
+        return redirect(route('domain-user.index'));
     }
 
     /**

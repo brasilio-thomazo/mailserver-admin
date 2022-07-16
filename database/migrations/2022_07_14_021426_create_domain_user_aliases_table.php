@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('source_id')->constrained('domain_users', 'id');
             $table->string('destination', 170);
-            $table->unique(['source_id', 'destination']);
+            $table->unique(['source_id']);
             $table->timestamps();
         });
     }

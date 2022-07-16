@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreDomainUserAliasRequest;
 use App\Http\Requests\UpdateDomainUserAliasRequest;
+use App\Models\DomainUser;
 use App\Models\DomainUserAlias;
+use Inertia\Inertia;
 
 class DomainUserAliasController extends Controller
 {
@@ -15,7 +17,12 @@ class DomainUserAliasController extends Controller
      */
     public function index()
     {
-        //
+        $aliases = DomainUserAlias::with('user', 'user.domain')->get();
+        $users = DomainUser::with('domain')->get();
+        return Inertia::render('DomainUserAliases', [
+            'aliases' => $aliases,
+            'users' => $users,
+        ]);
     }
 
     /**
@@ -36,16 +43,21 @@ class DomainUserAliasController extends Controller
      */
     public function store(StoreDomainUserAliasRequest $request)
     {
-        //
+        $alias = new DomainUserAlias([
+            'source_id' => $request->get('source_id'),
+            'destination' => $request->get('destination')
+        ]);
+        $alias->save();
+        return redirect(route('domain-user-alias.index'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\DomainUserAlias  $domainUserAlias
+     * @param  \App\Models\DomainUserAlias  $alias
      * @return \Illuminate\Http\Response
      */
-    public function show(DomainUserAlias $domainUserAlias)
+    public function show(DomainUserAlias $alias)
     {
         //
     }
@@ -53,10 +65,10 @@ class DomainUserAliasController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\DomainUserAlias  $domainUserAlias
+     * @param  \App\Models\DomainUserAlias  $alias
      * @return \Illuminate\Http\Response
      */
-    public function edit(DomainUserAlias $domainUserAlias)
+    public function edit(DomainUserAlias $alias)
     {
         //
     }
@@ -65,22 +77,26 @@ class DomainUserAliasController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateDomainUserAliasRequest  $request
-     * @param  \App\Models\DomainUserAlias  $domainUserAlias
+     * @param  \App\Models\DomainUserAlias  $alias
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateDomainUserAliasRequest $request, DomainUserAlias $domainUserAlias)
+    public function update(UpdateDomainUserAliasRequest $request, DomainUserAlias $alias)
     {
-        //
+        $alias->update([
+            'source_id' => $request->get('source_id'),
+            'destination' => $request->get('destination')
+        ]);
+        return redirect(route('domain-user-alias.index'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\DomainUserAlias  $domainUserAlias
+     * @param  \App\Models\DomainUserAlias  $alias
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DomainUserAlias $domainUserAlias)
+    public function destroy(DomainUserAlias $alias)
     {
-        //
+        $alias->delete();
     }
 }

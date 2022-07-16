@@ -13,7 +13,7 @@ class StoreDomainUserAliasRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return auth()->check();
     }
 
     /**
@@ -24,7 +24,8 @@ class StoreDomainUserAliasRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'source_id' => 'required|numeric|exists:domain_users,id|unique:domain_user_aliases,source_id',
+            'destination' => 'required|string|max:150'
         ];
     }
 }

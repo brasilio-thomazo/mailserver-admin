@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\DomainAliasController;
 use App\Http\Controllers\DomainController;
+use App\Http\Controllers\DomainUserAliasController;
 use App\Http\Controllers\DomainUserController;
-use App\Models\DomainUser;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -31,7 +32,9 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::resource('domain', DomainController::class)->middleware('auth');
-Route::resource('domain-user', DomainUserController::class)->middleware('auth');
+Route::resource('domain', DomainController::class)->middleware(['auth', 'verified']);
+Route::resource('domain-user', DomainUserController::class)->middleware(['auth', 'verified']);
+Route::resource('domain-alias', DomainAliasController::class)->middleware(['auth', 'verified']);
+Route::resource('domain-user-alias', DomainUserAliasController::class)->middleware(['auth', 'verified']);
 
 require __DIR__ . '/auth.php';

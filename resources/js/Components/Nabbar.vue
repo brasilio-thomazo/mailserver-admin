@@ -15,7 +15,13 @@ const page = usePage();
         <Link href="/domain">Dominios</Link>
       </li>
       <li class="item">
+        <Link href="/domain-alias">Redirecionamento de dominio</Link>
+      </li>
+      <li class="item">
         <Link href="/domain-user">E-mails</Link>
+      </li>
+      <li class="item">
+        <Link href="/domain-user-alias">Redirecionamento de e-mail</Link>
       </li>
     </ul>
   </nav>

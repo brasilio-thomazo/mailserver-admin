@@ -13,4 +13,9 @@ class DomainUserAlias extends Model
         'source_id',
         'destination'
     ];
+
+    public function user()
+    {
+        return $this->hasOne(DomainUser::class, "id", "source_id");
+    }
 }

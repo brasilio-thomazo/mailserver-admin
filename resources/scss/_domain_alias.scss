@@ -1,0 +1,47 @@
+#domain-aliases {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  align-items: center;
+
+  form {
+    width: 100%;
+    max-width: 980px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+  }
+
+  .aliases {
+    max-width: 980px;
+    width: 100%;
+    overflow: auto;
+    .grid {
+      .header {
+        display: grid;
+        width: 100%;
+        grid-template-columns: 50px 1fr 1fr 70px;
+        text-transform: uppercase;
+        border-bottom: 1px solid $dark-border;
+        background: $secondary;
+        padding: 5px;
+      }
+
+      .row {
+        display: grid;
+        width: 100%;
+        grid-template-columns: 50px 1fr 1fr 70px;
+        padding: 5px;
+        &:not(:last-child) {
+          border-bottom: 1px solid $dark-border;
+        }
+
+        .buttons {
+          display: flex;
+          column-gap: 5px;
+          justify-content: flex-end;
+        }
+      }
+    }
+  }
+}

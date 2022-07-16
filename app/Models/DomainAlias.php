@@ -12,4 +12,9 @@ class DomainAlias extends Model
         'source_id',
         'destination',
     ];
+
+    public function domain()
+    {
+        return $this->hasOne(Domain::class, "id", "source_id");
+    }
 }

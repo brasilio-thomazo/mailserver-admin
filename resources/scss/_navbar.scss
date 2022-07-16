@@ -19,14 +19,32 @@
     align-items: center;
 
     .item {
+      display: flex;
+      align-items: center;
       a {
         text-decoration: none;
-        color: $dark-text;
+        color: rgba($dark-text, 0.4);
         text-transform: uppercase;
-        font-size: 0.9rem;
+        font-size: 0.8rem;
         height: 35px;
         display: flex;
         align-items: center;
+
+        &.active {
+          color: $dark-text;
+        }
+
+        &:hover {
+          color: $dark-text;
+        }
+      }
+      &:not(:last-child)::after {
+        content: '';
+        background: rgba($primary-dark, 0.4);
+        border-right: 1px solid rgba($primary-dark, 0.3);
+        height: 20px;
+        width: 1px;
+        margin-left: 5px;
       }
     }
   }

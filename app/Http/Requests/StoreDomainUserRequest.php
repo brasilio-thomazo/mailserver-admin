@@ -13,7 +13,7 @@ class StoreDomainUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return auth()->check();
     }
 
     /**
@@ -24,7 +24,9 @@ class StoreDomainUserRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'domain_id' => 'required|numeric|exists:domains,id',
+            'user' => 'required|regex:/^[\w\d\._-]+$/|max:25|unique:domain_users,user,NULL,id,domain_id,' . $this->domain_id,
+            'password' => 'required|string|min:6|confirmed',
         ];
     }
 }
