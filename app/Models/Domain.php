@@ -25,4 +25,9 @@ class Domain extends Model
     {
         return $this->hasMany(DomainUser::class, "domain_id", "id");
     }
+
+    public function dkim()
+    {
+        return $this->hasOne(DomainDkim::class, 'domain_id', 'id');
+    }
 }

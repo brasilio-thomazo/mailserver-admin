@@ -15,6 +15,9 @@ const page = usePage();
         <Link href="/domain">Dominios</Link>
       </li>
       <li class="item">
+        <Link href="/domain-dkim">DKIM</Link>
+      </li>
+      <li class="item">
         <Link href="/domain-alias">Redirecionamento de dominio</Link>
       </li>
       <li class="item">

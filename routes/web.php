@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DomainAliasController;
 use App\Http\Controllers\DomainController;
+use App\Http\Controllers\DomainDkimController;
 use App\Http\Controllers\DomainUserAliasController;
 use App\Http\Controllers\DomainUserController;
 use Illuminate\Foundation\Application;
@@ -32,9 +33,24 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::resource('domain', DomainController::class)->middleware(['auth', 'verified']);
-Route::resource('domain-user', DomainUserController::class)->middleware(['auth', 'verified']);
-Route::resource('domain-alias', DomainAliasController::class)->middleware(['auth', 'verified']);
-Route::resource('domain-user-alias', DomainUserAliasController::class)->middleware(['auth', 'verified']);
+Route::resource('domain', DomainController::class)
+    ->except(['create', 'edit', 'show'])
+    ->middleware(['auth', 'verified']);
+
+Route::resource('domain-user', DomainUserController::class)
+    ->except(['create', 'edit', 'show'])
+    ->middleware(['auth', 'verified']);
+
+Route::resource('domain-alias', DomainAliasController::class)
+    ->except(['create', 'edit', 'show'])
+    ->middleware(['auth', 'verified']);
+
+Route::resource('domain-user-alias', DomainUserAliasController::class)
+    ->except(['create', 'edit', 'show'])
+    ->middleware(['auth', 'verified']);
+
+Route::resource('domain-dkim', DomainDkimController::class)
+    ->except(['create', 'edit', 'show'])
+    ->middleware(['auth', 'verified']);
 
 require __DIR__ . '/auth.php';
